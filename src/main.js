@@ -2,6 +2,10 @@ import "./index.css";
 
 import Glide from "@glidejs/glide";
 
+import axios from "axios";
+
+import dayjs from "dayjs";
+
 ("use strict");
 
 const HOURS = 1000 * 60 * 60;
@@ -10,15 +14,37 @@ const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
-const todaysDate = new Date();
-const timeToAdd = 9 * 24 * HOURS;
-// 9 days from current date
-const timerEndDate = new Date(
-    todaysDate.getTime() + timeToAdd
-);
+
+const campainDuration = 5;
+const promotionStart = new dayjs("2023-06-15T00:00:00");
+let currentTime = null;
+let campainNumber;
+let newCampainStartDay;
+let today;
+let campainEnd;
+
+function calcCampainDuration() {
+    campainNumber =
+        Math.floor(
+            Math.abs(promotionStart.diff(today, "d")) /
+                campainDuration
+        ) * 5;
+    newCampainStartDay = promotionStart.add(
+        campainNumber,
+        "day"
+    );
+
+    campainEnd = newCampainStartDay.add(
+        campainDuration,
+        "day"
+    );
+}
+
 const updateTimer = () => {
-    const currentTime = new Date().getTime();
-    const difference = timerEndDate.getTime() - currentTime;
+    currentTime = currentTime
+        ? currentTime.add(1000, "ms")
+        : today;
+    const difference = campainEnd.diff(currentTime);
     const remainingDays = Math.floor(
         difference / (HOURS * 24)
     );
@@ -52,8 +78,35 @@ const updateTimer = () => {
     minutesElement.innerText = formattedMinutes;
     secondsElement.innerText = formattedSeconds;
 };
-updateTimer();
-setInterval(updateTimer, 1000);
+
+//TODO Atenção, remover o s do worldtime para que o sistema puxe a data sem utilzar o a data do PC do usuário
+axios({
+    method: "get",
+    url: "https://api.api-ninjas.com/v1/worldtimes?city=brazilia",
+    headers: {
+        "X-Api-Key":
+            "daxt47FMZl0RLCreYS5MFg==OYXWPzTj8ai4Mdzb",
+    },
+    responseType: "json",
+})
+    .then(function (response) {
+        today = dayjs(response.data.datetime);
+        calcCampainDuration();
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    })
+    .catch((e) => {
+        //TODO Remover esse logo, após a remoção do S do worldtime acima e antes de colocar em produção
+        console.log(
+            "Cai no erro, retornando dia atual do pc do usuário"
+        );
+        today = dayjs();
+        calcCampainDuration();
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    });
+
+// Fim da Contador de Tempo até o final da campanha
 
 const btnMobileMenu =
     document.getElementById("btnMobileMenu");
