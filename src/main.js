@@ -14,6 +14,8 @@ const daysElement = document.getElementById("days");
 const hoursElement = document.getElementById("hours");
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
+const promotionEndElement =
+    document.getElementById("promotionEnd");
 
 const campainDuration = 5;
 const promotionStart = new dayjs("2023-06-15T00:00:00");
@@ -38,6 +40,8 @@ function calcCampainDuration() {
         campainDuration,
         "day"
     );
+    promotionEndElement.innerText =
+        campainEnd.format("DD/MM/YYYY");
 }
 
 const updateTimer = () => {
@@ -94,19 +98,71 @@ axios({
         calcCampainDuration();
         updateTimer();
         setInterval(updateTimer, 1000);
+        accessControl(today);
     })
     .catch((e) => {
-        //TODO Remover esse logo, após a remoção do S do worldtime acima e antes de colocar em produção
-        console.log(
-            "Cai no erro, retornando dia atual do pc do usuário"
-        );
         today = dayjs();
         calcCampainDuration();
         updateTimer();
         setInterval(updateTimer, 1000);
+        accessControl(today);
     });
 
 // Fim da Contador de Tempo até o final da campanha
+
+let vacancies = 40;
+const vacanciesNumberElement =
+    document.getElementById("vacancies");
+const durationHours = (campainDuration - 1) * 24 * 60;
+
+function reduction(diff, multi, min) {
+    return (
+        (vacancies * (multi * diff + min)) / durationHours
+    );
+}
+
+async function accessControl(today) {
+    if (typeof Storage !== "undefined") {
+        if (localStorage.lastAccess) {
+            const lastAccessDate = new dayjs(
+                await JSON.parse(localStorage.lastAccess)
+            );
+            const lastAccessDifference = today.diff(
+                lastAccessDate,
+                "m"
+            );
+            console.log(lastAccessDifference);
+            let lastVacancies;
+            if (lastAccessDifference < 120) {
+                lastVacancies =
+                    vacancies -
+                    reduction(lastAccessDifference, 15, 0);
+            }
+            if (
+                lastAccessDifference >= 120 &&
+                lastAccessDifference <= 1800
+            ) {
+                lastVacancies =
+                    vacancies -
+                    reduction(
+                        lastAccessDifference,
+                        3,
+                        1800
+                    );
+            }
+            lastVacancies =
+                lastVacancies < 1 ? 1 : lastVacancies;
+            vacanciesNumberElement.innerText =
+                Math.floor(lastVacancies);
+        } else {
+            localStorage.lastAccess = JSON.stringify(today);
+            vacanciesNumberElement.innerText = vacancies;
+        }
+    } else {
+        vacanciesNumberElement.innerText = 43;
+    }
+}
+// fim do contador de vagas
 
 const btnMobileMenu =
     document.getElementById("btnMobileMenu");
