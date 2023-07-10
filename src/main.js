@@ -110,7 +110,7 @@ axios({
 
 // Fim da Contador de Tempo até o final da campanha
 
-let vacancies = 40;
+let vacancies = 80;
 const vacanciesNumberElement =
     document.getElementById("vacancies");
 const durationHours = (campainDuration - 1) * 24 * 60;
@@ -131,24 +131,30 @@ async function accessControl(today) {
                 lastAccessDate,
                 "m"
             );
-            console.log(lastAccessDifference);
+            console.log(
+                "Diferença em minutos para o último acesso: ",
+                lastAccessDifference
+            );
             let lastVacancies;
-            if (lastAccessDifference < 120) {
+            if (lastAccessDifference <= 120) {
                 lastVacancies =
-                    vacancies -
-                    reduction(lastAccessDifference, 15, 0);
+                    vacancies - lastAccessDifference / 3;
             }
             if (
-                lastAccessDifference >= 120 &&
-                lastAccessDifference <= 1800
+                lastAccessDifference > 120 &&
+                lastAccessDifference <= 300
             ) {
                 lastVacancies =
                     vacancies -
-                    reduction(
-                        lastAccessDifference,
-                        3,
-                        1800
-                    );
+                    40 -
+                    lastAccessDifference / 10;
+            }
+            if (lastAccessDifference > 300) {
+                lastVacancies =
+                    lastVacancies -
+                    40 -
+                    30 -
+                    lastAccessDifference / 50;
             }
             lastVacancies =
                 lastVacancies < 1 ? 1 : lastVacancies;
