@@ -86,7 +86,7 @@ const updateTimer = () => {
 //TODO Atenção, remover o s do worldtime para que o sistema puxe a data sem utilzar o a data do PC do usuário
 axios({
     method: "get",
-    url: "https://api.api-ninjas.com/v1/worldtimes?city=brazilia",
+    url: "https://api.api-ninjas.com/v1/worldtime?city=brazilia",
     headers: {
         "X-Api-Key":
             "daxt47FMZl0RLCreYS5MFg==OYXWPzTj8ai4Mdzb",
@@ -110,16 +110,9 @@ axios({
 
 // Fim da Contador de Tempo até o final da campanha
 
-let vacancies = 80;
+let vacancies = 90;
 const vacanciesNumberElement =
     document.getElementById("vacancies");
-const durationHours = (campainDuration - 1) * 24 * 60;
-
-function reduction(diff, multi, min) {
-    return (
-        (vacancies * (multi * diff + min)) / durationHours
-    );
-}
 
 async function accessControl(today) {
     if (typeof Storage !== "undefined") {
@@ -130,10 +123,6 @@ async function accessControl(today) {
             const lastAccessDifference = today.diff(
                 lastAccessDate,
                 "m"
-            );
-            console.log(
-                "Diferença em minutos para o último acesso: ",
-                lastAccessDifference
             );
             let lastVacancies;
             if (lastAccessDifference <= 120) {
@@ -151,10 +140,10 @@ async function accessControl(today) {
             }
             if (lastAccessDifference > 300) {
                 lastVacancies =
-                    lastVacancies -
+                    vacancies -
                     40 -
                     30 -
-                    lastAccessDifference / 50;
+                    lastAccessDifference / 280;
             }
             lastVacancies =
                 lastVacancies < 1 ? 1 : lastVacancies;
