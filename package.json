@@ -15,7 +15,6 @@
     },
     "dependencies": {
         "@glidejs/glide": "^3.6.0",
-        "axios": "^1.4.0",
         "dayjs": "^1.11.9"
     }
 }

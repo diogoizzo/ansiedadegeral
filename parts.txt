@@ -1419,3 +1419,20 @@ Antigo slider de testemunhos
                         </div>
                     </div>
                 </div>
+
+
+                <a
+                            href="https://pay.kiwify.com.br/EhuojTk"
+                            class="focus:ring-violeta-300 leading-[15px] text-center hover:bg-violeta-900 hover:scale-105 border-violeta-600 text-violeta-50 bg-violeta-800 shadow-xl shadow-violeta-500/80 hover:shadow-violeta-500 hover:shadow-2xl pt-2 pb-5 px-4 md:px-10 xl:px-6 font-semibold border rounded-2xl focus:ring transition-all ease-in-out duration-200"
+                            type="button"
+                        >
+                            <span
+                                class="text-lg text-violeta-200"
+                                >Não Quero Perder</span
+                            >
+                            <span
+                                class="text-shadow-violeta block text-xl uppercase leading-[12px] md:leading-[15px]"
+                                >Vou aproveitar a
+                                promoção</span
+                            >
+                        </a>

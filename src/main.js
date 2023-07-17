@@ -2,8 +2,6 @@ import "./index.css";
 
 import Glide from "@glidejs/glide";
 
-import axios from "axios";
-
 import dayjs from "dayjs";
 
 ("use strict");
@@ -84,29 +82,11 @@ const updateTimer = () => {
 };
 
 //TODO Atenção, remover o s do worldtime para que o sistema puxe a data sem utilzar o a data do PC do usuário
-axios({
-    method: "get",
-    url: "https://api.api-ninjas.com/v1/worldtime?city=brazilia",
-    headers: {
-        "X-Api-Key":
-            "daxt47FMZl0RLCreYS5MFg==OYXWPzTj8ai4Mdzb",
-    },
-    responseType: "json",
-})
-    .then(function (response) {
-        today = dayjs(response.data.datetime);
-        calcCampainDuration();
-        updateTimer();
-        setInterval(updateTimer, 1000);
-        accessControl(today);
-    })
-    .catch((e) => {
-        today = dayjs();
-        calcCampainDuration();
-        updateTimer();
-        setInterval(updateTimer, 1000);
-        accessControl(today);
-    });
+today = dayjs();
+calcCampainDuration();
+updateTimer();
+setInterval(updateTimer, 1000);
+accessControl(today);
 
 // Fim da Contador de Tempo até o final da campanha
 
