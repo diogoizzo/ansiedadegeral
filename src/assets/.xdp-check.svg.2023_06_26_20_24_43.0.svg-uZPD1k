@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="27"
+   height="27"
+   viewBox="0 0 27 27"
+   fill="none"
+   version="1.1"
+   id="svg6443"
+   sodipodi:docname="check.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6445"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="31.296296"
+     inkscape:cx="5.735503"
+     inkscape:cy="13.531953"
+     inkscape:window-width="2560"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6443" />
+  <path
+     d="M9.375 13.5L12.125 16.25L17.625 10.75M25.875 13.5C25.875 20.3345 20.3345 25.875 13.5 25.875C6.66548 25.875 1.125 20.3345 1.125 13.5C1.125 6.66548 6.66548 1.125 13.5 1.125C20.3345 1.125 25.875 6.66548 25.875 13.5Z"
+     stroke="url(#paint0_linear_730_403)"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path6432"
+     style="fill-opacity:1;fill:none;stroke:url(#paint0_linear_730_403)"
+     inkscape:export-filename="../dc061288/check.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96" />
+  <defs
+     id="defs6441">
+    <linearGradient
+       id="paint0_linear_730_403"
+       x1="1.125"
+       y1="1.125"
+       x2="28.8761"
+       y2="5.1419"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#6CD5F7"
+         id="stop6434"
+         offset="0"
+         style="stop-color:#8b5cf6;stop-opacity:1;" />
+      <stop
+         offset="0.44817737"
+         stop-color="#F89D5C"
+         id="stop6436"
+         style="stop-color:#a78bfa;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#5B6AF0"
+         id="stop6438"
+         style="stop-color:#8b5cf6;stop-opacity:1;" />
+    </linearGradient>
+  </defs>
+</svg>
